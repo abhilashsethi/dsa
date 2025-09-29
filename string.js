@@ -139,7 +139,7 @@
 // }
 // console.log(containsDuplicate([1, 2, 3, 4]))
 
-// Question 2: Contain duplicate using map and 
+// Question 2: Contain duplicate using map and
 // const containsDuplicate = (arr) => {
 //   let map = new Map()
 //   for (let n of arr) {
@@ -231,10 +231,59 @@
 // console.log(isAnagram("listen", "silentl"))
 
 // Question 5: Valid anagram using string methods
-const isAnagramString = (s1, s2) => {
-  if (s1.length !== s2.length) {
-    return false
+// const isAnagramString = (s1, s2) => {
+//   if (s1.length !== s2.length) {
+//     return false
+//   }
+//   return s1.split("").sort().join("") === s2.split("").sort().join("")
+// }
+// console.log(isAnagramString("listen", "silent"))
+
+// Question 6: Two sum (index of two numbers such that they add up to a specific target)
+// const twoSum = (arr, target) => {
+//   let map = new Map()
+//   for (let i = 0; i < arr.length; i++) {
+//     let pairedTarget = target - arr[i]
+//     if (map.has(pairedTarget)) {
+//       return [map.get(pairedTarget), i]
+//     }
+//     map.set(arr[i], i)
+//   }
+// }
+// console.log(twoSum([2, 7, 11, 15], 9))
+
+// Question 7: Two sum (Two number)
+// const twoSumNumber = (arr, target) => {
+//   let map = new Map()
+//   for (let i = 0; i < arr.length; i++) {
+//     let pairedTarget = target - arr[i]
+//     if (map.has(pairedTarget)) {
+//       return [pairedTarget, arr[i]]
+//     }
+//     map.set(arr[i], i)
+//   }
+// }
+// console.log(twoSumNumber([2, 7, 11, 15], 9))
+
+// Question 8: Product of array except self
+const productExceptSelf = (arr) => {
+  let n = arr.length
+  let left = Array(n).fill(0);
+  let right = Array(n).fill(0);
+  let output = Array(n).fill(0);
+  left[0] = arr[0]
+  right[n - 1] = arr[n - 1];
+  for (let i = 1; i < n; i++) {
+    left[i] = left[i - 1] * arr[i];
   }
-  return s1.split("").sort().join("") === s2.split("").sort().join("")
+  for (let i = n - 2; i > 0; i--) {
+    right[i] = right[i + 1] * arr[i];
+  }
+  output[0] = right[1];
+  output[n - 1] = left[n - 2];
+  for (let i = 1; i < n - 1; i++) {
+    output[i] = left[i - 1] * right[i + 1];
+  }
+  return output
 }
-console.log(isAnagramString("listen", "silent"))
+console.log(productExceptSelf([1, 2, 3, 4]))
